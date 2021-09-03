@@ -1,6 +1,6 @@
 import pygame
 
-from player import Player
+from game import Game
 
 
 pygame.init()
@@ -12,8 +12,8 @@ screen = pygame.display.set_mode((1080, 720))
 # import background image
 background = pygame.image.load('assets/bg.jpg')
 
-# create a player object
-player = Player()
+# create a game object
+game = Game()
 
 running = True
 
@@ -24,7 +24,7 @@ while running:
     screen.blit(background, (0, -200))
 
     # charge the player Image
-    screen.blit(player.image, player.rect)
+    screen.blit(game.player.image, game.player.rect)
 
     # update screen
     pygame.display.flip()
