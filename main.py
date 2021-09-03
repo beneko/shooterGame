@@ -26,6 +26,12 @@ while running:
     # charge the player Image
     screen.blit(game.player.image, game.player.rect)
 
+    # detect left and right key press and move the player
+    if game.pressed.get(pygame.K_RIGHT):
+        game.player.move_right()
+    elif game.pressed.get(pygame.K_LEFT):
+        game.player.move_left()
+
     # update screen
     pygame.display.flip()
 
@@ -37,9 +43,9 @@ while running:
             pygame.quit()
         # verify if player press a key
         elif event.type == pygame.KEYDOWN:
-            # verify which key is pressed
-            if event.key == pygame.K_RIGHT:
-                game.player.move_right()
-            if event.key == pygame.K_LEFT:
-                game.player.move_left()
+            # set true value for pressed key in game.pressed dictionary
+            game.pressed[event.key] = True
+        elif event.type == pygame.KEYUP:
+            # set false value for pressed key in game.pressed dictionary
+            game.pressed[event.key] = False
 
