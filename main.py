@@ -28,13 +28,17 @@ while running:
     # charge all projectile image in the screen
     game.player.all_projectiles.draw(screen)
 
+    # get projectile of player
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
     # detect left and right key press and move the player
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < screen.get_width() - game.player.image.get_width():
         game.player.move_right()
     elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
         game.player.move_left()
 
-    print(game.pressed)
+    # print(game.pressed)
 
     # update screen
     pygame.display.flip()
