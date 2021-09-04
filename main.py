@@ -1,5 +1,4 @@
 import pygame
-
 from game import Game
 
 
@@ -26,13 +25,16 @@ while running:
     # charge the player Image
     screen.blit(game.player.image, game.player.rect)
 
+    # charge all projectile image in the screen
+    game.player.all_projectiles.draw(screen)
+
     # detect left and right key press and move the player
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < screen.get_width() - game.player.image.get_width():
         game.player.move_right()
     elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
         game.player.move_left()
 
-    # print(game.player.rect.x)
+    print(game.pressed)
 
     # update screen
     pygame.display.flip()
@@ -43,11 +45,16 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+
         # verify if player press a key
         elif event.type == pygame.KEYDOWN:
             # set true value for pressed key in game.pressed dictionary
             game.pressed[event.key] = True
+
+            # lunch projectile if player press the space key
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
+
         elif event.type == pygame.KEYUP:
             # set false value for pressed key in game.pressed dictionary
             game.pressed[event.key] = False
-
