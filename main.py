@@ -25,12 +25,18 @@ while running:
     # charge the player Image
     screen.blit(game.player.image, game.player.rect)
 
-    # charge all projectile image in the screen
+    # charge all projectile images in the screen
     game.player.all_projectiles.draw(screen)
+
+    # charge all monster images in the screen
+    game.all_monsters.draw(screen)
 
     # get projectile of player
     for projectile in game.player.all_projectiles:
         projectile.move()
+
+    for monster in game.all_monsters:
+        monster.forward()
 
     # detect left and right key press and move the player
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < screen.get_width() - game.player.image.get_width():
